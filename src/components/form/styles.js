@@ -7,8 +7,14 @@ const InputField = {
   fontSize: 'inherit',
 };
 
+const Label = {
+  display: 'block',
+  marginBottom:'0.6rem'
+};
+
 const Box = {
-  margin: '5px',
+  margin: '0.5rem',
+  padding:'1rem'
 };
 
 const ErrorMessage = {
@@ -19,6 +25,7 @@ const styles = {
   InputField,
   Box,
   ErrorMessage,
+  Label,
 };
 
 export default styles;
