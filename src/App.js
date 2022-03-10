@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './components/header/Header';
 import PublicRoutes from './routes/public/PublicRoutes';
 import PrivateRoutes from './routes/private/PrivateRoutes';
 import PageNotFound from './components/pagenotfound/PageNotFound';
@@ -7,18 +6,21 @@ import Login from './pages/login/LoginPage';
 import HomePage from './pages/home/HomePage';
 import { useSelector, useDispatch } from 'react-redux';
 import { authenticateAction } from './store/userReducer';
-import Details from './pages/details/Details';
 import SearchResults from './pages/searchResults/SearchResults';
+import Details from './pages/details/Details';
 import {
   INDEX_ROUTE,
   HOME_ROUTE,
-  DETAILS_ID_ROUTE,
   SEARCH_RESULTS_FULL_ROUTE,
   NOTFOUND_ROUTE,
+  DETAILS_ROUTE,
 } from './routes';
 
+
 const App = () => {
-  const isUserAuthenticated = useSelector((state) => state.user.authenticated);
+  const isUserAuthenticated = useSelector(
+    (state) => state.persistedReducer.user.authenticated
+  );
   const dispatch = useDispatch();
   let token = '';
 
@@ -36,7 +38,6 @@ const App = () => {
   }
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
         <Route
           path={INDEX_ROUTE}
@@ -51,7 +52,7 @@ const App = () => {
           element={<PrivateRoutes isAuthenticated={isUserAuthenticated} />}
         >
           <Route path={HOME_ROUTE} element={<HomePage />}></Route>
-          <Route path={DETAILS_ID_ROUTE} element={<Details />}></Route>
+          <Route path={DETAILS_ROUTE} element={<Details/>}></Route>
           <Route
             path={SEARCH_RESULTS_FULL_ROUTE}
             element={<SearchResults />}

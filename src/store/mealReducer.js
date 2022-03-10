@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 const initialState = {
-  data: []
+  data: [],
 };
+
 const mealSlice = createSlice({
   initialState,
   name: 'meal',
@@ -10,7 +12,7 @@ const mealSlice = createSlice({
       console.log('setMealsData state', state, 'action', action);
       state.data = action.payload;
     },
-  }
+  },
 });
 
 export const getComplexMealsAction = mealSlice.actions;
