@@ -4,8 +4,7 @@ import { getMeals } from '../../services/apiService';
 import { useDispatch, useSelector } from 'react-redux';
 import MealsList from '../../components/MealsList';
 import AverageCard from '../../components/AverageCard';
-import { HStack, CircularProgress } from '@chakra-ui/react';
-import { VStack } from '@chakra-ui/react';
+import CircularProgress from '@mui/material/CircularProgress';
 import { getComplexMealsAction } from '../../store/mealReducer';
 import Search from '../../components/Search';
 import { ToastContainer } from 'react-toastify';
@@ -43,25 +42,19 @@ const HomePage = () => {
     <>
       {loading || !mealsData.length && (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <CircularProgress
-            isIndeterminate
-            color="green.400"
-            size={'5rem'}
-            justifySelf={'center'}
-            alignSelf={'center'}
-          />
+          <CircularProgress/>
         </div>
       ) 
       }
       <>
         <Search></Search>
         <ToastContainer/>
-        <HStack justifyContent={'center'}>
+        <div>
           <MealsList meals={mealsData} />
-          <VStack>
+          <div>
             <AverageCard meals={mealsData} />
-          </VStack>
-        </HStack>
+          </div>
+        </div>
       </>
     </>
   );

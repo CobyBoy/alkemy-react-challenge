@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box, Image, Stack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { DETAILS_ROUTE } from '../routes';
 
@@ -29,26 +28,20 @@ const MealItem = ({ mealItem }) => {
 
   return (
     <>
-      <Box
-        backgroundColor={'ButtonFace'}
-        borderRadius="md"
-        shadow="lg"
-        borderWidth="4px"
-        flex="1"
-        cursor={'pointer'}
+      <div
         onClick={() => {
           handleClick(id);
         }}
       >
-        <Stack width={'30rem'}>
-          <Image src={image} alt="" />
+        <div width={'30rem'}>
+          <img src={image} alt="" />
           <div>{title}</div>
           <div>Price: ${pricePerServing}</div>
           <div style={{ display: 'flex' }}>
             {mealNutrientsToShow?.map(({ amount, name }, index) => (
               <div key={index} style={{ width: '25%' }}>
-                <Box>{name}</Box>
-                <Box>{amount}</Box>
+                <div>{name}</div>
+                <div>{amount}</div>
               </div>
             ))}
           </div>
@@ -58,8 +51,8 @@ const MealItem = ({ mealItem }) => {
               <span key={id + index}>{name}/ </span>
             ))}
           </div>
-        </Stack>
-      </Box>
+        </div>
+      </div>
     </>
   );
 };

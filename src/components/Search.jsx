@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { FormLabel } from '@chakra-ui/react';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { SEARCH_RESULTS_ROUTE } from '../routes';
@@ -33,9 +32,9 @@ const Search = () => {
       >
         {({ handleChange }) => (
           <Form>
-            <FormLabel htmlFor="search" style={{ margin: '1rem' }}>
+            <label htmlFor="search" style={{ margin: '1rem' }}>
               Search
-            </FormLabel>
+            </label>
             <Field
               onChange={(e) => {
                 handleSearch(e, handleChange);

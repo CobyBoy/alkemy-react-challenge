@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export const startLogin = async (values, dispatch) => {
   try {
     const { data } = await apiClient.getLoginToken(values);
+    logService.showSuccessMessage('Successful login');
     if (data === undefined) throw new Error('Could not login');
     console.log('data startLogin apiService', data);
     localStorage.setItem('loginToken', JSON.stringify(data.token));
@@ -17,7 +18,6 @@ export const startLogin = async (values, dispatch) => {
         token: data.token,
       })
     );
-    logService.showSuccessMessage('Successful login');
     return data;
   } catch (error) {
     logService.logError(error.response.data.error);

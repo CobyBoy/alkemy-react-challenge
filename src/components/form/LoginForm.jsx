@@ -1,11 +1,13 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { FormLabel, Button } from '@chakra-ui/react';
 import * as Yup from 'yup';
 import * as apiService from '../../services/apiService';
 import { useSelector, useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import styles from './styles';
 
 const LoginForm = () => {
   const initialValues = { email: 'challenge@alkemy.org', password: 'react' };
@@ -29,36 +31,50 @@ const LoginForm = () => {
       {({ isSubmitting }) => (
         <Form>
           {console.log('selectorLoginFormIsAuth', isUserAuthenticated)}
-          <FormLabel htmlFor="email">Email address</FormLabel>
-          <Field
-            id="email"
-            type="email"
-            name="email"
-            placeholder="challenge@alkemy.org"
-            size="lg"
-            style={{ width: '100%' }}
-          />
-          <ErrorMessage name="email" component="div" style={{ color: 'red' }} />
-          <FormLabel htmlFor="password">Password</FormLabel>
-          <Field
-            id="password"
-            type="password"
-            name="password"
-            placeholder="react"
-            size="lg"
-            style={{ width: '100%' }}
-          />
-          <ErrorMessage
-            name="password"
-            component="div"
-            style={{ color: 'red' }}
-          />
-          <div>
-            <Button colorScheme="blue" type="submit" disabled={isSubmitting}>
+          <Box sx={styles.Box}>
+            <label htmlFor="email">Email address</label>
+
+            <Box borderRadius={'2rem'}>
+              <Field
+                id="email"
+                type="email"
+                name="email"
+                placeholder="challenge@alkemy.org"
+                size="lg"
+                style={styles.InputField}
+              />
+              <ErrorMessage
+                name="email"
+                component="div"
+                style={styles.ErrorMessage}
+              />
+            </Box>
+          </Box>
+          <Box sx={styles.Box}>
+            <label htmlFor="password">Password</label>
+            <Box>
+              <Field
+                id="password"
+                type="password"
+                name="password"
+                placeholder="react"
+                size="lg"
+                style={styles.InputField}
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                style={styles.ErrorMessage}
+              />
+            </Box>
+          </Box>
+
+          <Box>
+            <Button type="submit" disabled={isSubmitting} variant="contained">
               Submit
             </Button>
             <ToastContainer />
-          </div>
+          </Box>
         </Form>
       )}
     </Formik>

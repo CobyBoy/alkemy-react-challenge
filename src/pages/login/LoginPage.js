@@ -1,17 +1,24 @@
 import React from 'react';
-import { Container, Box } from '@chakra-ui/react';
 import LoginForm from '../../components/form/LoginForm';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 
 const LoginPage = () => {
   return (
     <>
-      <Container maxW="xl">
-        <Box padding="4" bg="gray.100" maxW="3xl">
-          Login page. Welcome to blah blah blah
-        </Box>
-        <Box padding="4" bg="gray.100" maxW="3xl">
-          <LoginForm />
-        </Box>
+      <Container>
+        <Paper elevation={6}>
+          <Box m={2}>
+            <Typography align="center" variant="h5">
+              Login page. Welcome to blah blah blah
+            </Typography>
+          </Box>
+          <Box>
+            <LoginForm />
+          </Box>
+        </Paper>
       </Container>
     </>
   );
