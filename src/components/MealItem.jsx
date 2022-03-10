@@ -1,9 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DETAILS_ROUTE } from '../routes';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
 
 const MealItem = ({ mealItem }) => {
-  const { title, image, pricePerServing, nutrition, id } = mealItem;
+  const { title, image, pricePerServing, nutrition } = mealItem;
   let navigate = useNavigate();
   const mealNutrientsFiltered = [
     'Calories',
@@ -22,37 +27,49 @@ const MealItem = ({ mealItem }) => {
     );
   });
 
-  const handleClick = (id) => {
-    navigate(`${DETAILS_ROUTE}/${id}`);
+  const handleClick = () => {
+    navigate(`${DETAILS_ROUTE}`);
   };
 
   return (
     <>
-      <div
+      <Card
+        sx={{
+          maxWidth: 400,
+          margin: '2rem',
+          minWidth: '25rem',
+          minHeight: '33rem',
+        }}
         onClick={() => {
-          handleClick(id);
+          handleClick();
         }}
       >
-        <div width={'30rem'}>
-          <img src={image} alt="" />
-          <div>{title}</div>
+        <CardMedia
+          component="img"
+          image={image}
+          width="50%"
+          height="50%"
+          alt={title}
+        />
+        <CardContent>
+          <Typography>{title}</Typography>
           <div>Price: ${pricePerServing}</div>
-          <div style={{ display: 'flex' }}>
+          <Stack direction="row" spacing={2}>
             {mealNutrientsToShow?.map(({ amount, name }, index) => (
-              <div key={index} style={{ width: '25%' }}>
-                <div>{name}</div>
+              <div key={index}>
+                <Typography>{name}</Typography>
                 <div>{amount}</div>
               </div>
             ))}
-          </div>
-          <div>Ingredients</div>
+          </Stack>
+          <Typography>Ingredients</Typography>
           <div>
             {ingredients?.map(({ name, id }, index) => (
               <span key={id + index}>{name}/ </span>
             ))}
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </>
   );
 };

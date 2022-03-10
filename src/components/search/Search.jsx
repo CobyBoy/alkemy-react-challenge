@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import { SEARCH_RESULTS_ROUTE } from '../routes';
+import { SEARCH_RESULTS_ROUTE } from '../../routes';
+import styles from './styles';
 
 const Search = () => {
   const [searchText, setSearchText] = useState('');
@@ -32,7 +33,7 @@ const Search = () => {
       >
         {({ handleChange }) => (
           <Form>
-            <label htmlFor="search" style={{ margin: '1rem' }}>
+            <label htmlFor="search" style={styles.Label}>
               Search
             </label>
             <Field
@@ -47,12 +48,12 @@ const Search = () => {
               name="textSearch"
               placeholder="Search for meal"
               size="lg"
-              style={{ width: '100%', margin: '1rem' }}
+              style={styles.InputField}
             />
             <ErrorMessage
               name="textSearch"
               component="div"
-              style={{ color: 'red' }}
+              style={styles.ErrorMessage}
             />
           </Form>
         )}
