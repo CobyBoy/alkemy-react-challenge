@@ -11,7 +11,7 @@ import styles from './styles';
 
 const LoginForm = () => {
   const initialValues = { email: 'challenge@alkemy.org', password: 'react' };
-  const isUserAuthenticated = useSelector(state => state.user.authenticated);
+  const isUserAuthenticated = useSelector(state => state.persistedReducer.user.authenticated);
   const dispatch = useDispatch();
   const fieldsToValidate = {
     email: Yup.string().email().required('email required'),
@@ -32,7 +32,9 @@ const LoginForm = () => {
         <Form>
           {console.log('selectorLoginFormIsAuth', isUserAuthenticated)}
           <Box sx={styles.Box}>
-            <label htmlFor="email">Email address</label>
+            <label htmlFor="email" style={styles.Label}>
+              Email address
+            </label>
 
             <Box borderRadius={'2rem'}>
               <Field
@@ -51,7 +53,9 @@ const LoginForm = () => {
             </Box>
           </Box>
           <Box sx={styles.Box}>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" style={styles.Label}>
+              Password
+            </label>
             <Box>
               <Field
                 id="password"
@@ -69,7 +73,7 @@ const LoginForm = () => {
             </Box>
           </Box>
 
-          <Box>
+          <Box sx={styles.Box}>
             <Button type="submit" disabled={isSubmitting} variant="contained">
               Submit
             </Button>
