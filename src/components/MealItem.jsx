@@ -4,6 +4,7 @@ import { DETAILS_ROUTE, SEARCH_RESULTS_ROUTE } from '../routes';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Button, CardActions } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -17,6 +18,31 @@ const MealItem = ({ mealItem, pathname }) => {
   const currentMeals = useSelector((state) => state.persistedReducer.meals.data);
   const dispatch = useDispatch();
   let navigate = useNavigate();
+  let propToRender = {
+    textToDisplay: '',
+    functionToDispacth: () => { },
+    icon: ''
+  };
+
+  const functionReassign = (meal, e) => {
+    console.log('funciton reassiing', meal, e);
+    e.target.textContent == 'Add it'
+      ? addToMenu(meal)
+      : deleteMealFromMenu(meal);
+    
+  };
+
+
+  if (pathname === SEARCH_RESULTS_ROUTE) {
+    propToRender.textToDisplay = 'Add it';
+    propToRender.functionToDispacth = functionReassign;
+    propToRender.icon;
+  }
+  else {
+    propToRender.textToDisplay = 'Delete it';
+    propToRender.functionToDispacth = functionReassign;
+    propToRender.icon = <DeleteIcon/>;
+  }
   const mealNutrientsFiltered = [
     'Calories',
     'Fat',
@@ -39,23 +65,23 @@ const MealItem = ({ mealItem, pathname }) => {
   };
 
   const addToMenu = (mealToAdd) => {
-    console.log('button clicked', mealToAdd);
-    let veganMeals = currentMeals.filter((currentMeal) => currentMeal.vegan).length;
-    let notVeganMeals = currentMeals.filter((currentMeal) => !currentMeal.vegan).length;
+    console.log('addToMenu', mealToAdd);
+    let veganMeals = currentMeals.filter((currentMeal) => currentMeal?.vegan).length;
+    let notVeganMeals = currentMeals.filter((currentMeal) => !currentMeal?.vegan).length;
 
     if (currentMeals.length === 4) {
       logService.logError('Sorry, the menu is full. Meal cant be added');
     }
     else
-    if (mealToAdd.vegan && veganMeals >= 2) {
+    if (mealToAdd?.vegan && veganMeals >= 2) {
       logService.logError('Sorry, meal cant be added. There are already two vegan meals on menu');
     }else
-    if (!mealToAdd.vegan && notVeganMeals >= 2) {
+    if (!mealToAdd?.vegan && notVeganMeals >= 2) {
       logService.logError(
         'Sorry, meal cant be added. there are already two non vegan meals on menu'
       );
     }
-    else if (currentMeals.some(current => current.id === mealToAdd.id)) {
+    else if (currentMeals.some(current => current.id === mealToAdd?.id)) {
       logService.logError('Sorry, meal is already on the menu');
     }
     else {
@@ -67,68 +93,23 @@ const MealItem = ({ mealItem, pathname }) => {
   const deleteMealFromMenu = (mealToDelete) => {
     console.log('Meal to delete', mealToDelete);
     dispatch(getComplexMealsAction.deleteMealFromMenu(mealToDelete.id));
+    logService.showSuccessMessage('Meal deleted successfully');
   };
 
   return (
     <>
-      {pathname === SEARCH_RESULTS_ROUTE ? (
-        <Card
-          sx={{
-            maxWidth: 400,
-            margin: '2rem',
-            minWidth: '25rem',
-            minHeight: '33rem',
-          }}
-        >
-          <CardContent
-            sx={{ cursor: 'pointer' }}
-            onClick={() => {
-              handleClick();
-            }}
-          >
-            <CardMedia
-              component="img"
-              image={image}
-              width="50%"
-              height="50%"
-              alt={title}
-            />
-
-            <Typography>{title}</Typography>
-            <div>Price: ${pricePerServing}</div>
-            <Stack direction="row" spacing={2}>
-              {mealNutrientsToShow?.map(({ amount, name }, index) => (
-                <div key={index}>
-                  <Typography>{name}</Typography>
-                  <div>{amount}</div>
-                </div>
-              ))}
-            </Stack>
-            <Typography>Ingredients</Typography>
-            <div>
-              {ingredients?.map(({ name, id }, index) => (
-                <span key={id + index}>{name}/ </span>
-              ))}
-            </div>
-          </CardContent>
-          <CardActions>
-            <Button
-              onClick={() => {
-                addToMenu(mealItem);
-              }}
-              variant="contained"
-            >
-              Add
-            </Button>
-          </CardActions>
-        </Card>
-      ) : (
-        <Card
-          sx={{
-            maxWidth: 400,
-            margin: '2rem',
-            minWidth: '25rem',
-            minHeight: '33rem',
+      <Card
+        sx={{
+          maxWidth: 400,
+          margin: '2rem',
+          minWidth: '25rem',
+          minHeight: '33rem',
+        }}
+      >
+        <CardContent
+          sx={{ cursor: 'pointer' }}
+          onClick={() => {
+            handleClick();
           }}
         >
           <CardMedia
@@ -138,41 +119,36 @@ const MealItem = ({ mealItem, pathname }) => {
             height="50%"
             alt={title}
           />
-          <CardContent
-            sx={{ cursor: 'pointer' }}
-            onClick={() => {
-              handleClick();
+
+          <Typography>{title}</Typography>
+          <div>Price: ${pricePerServing}</div>
+          <Stack direction="row" spacing={2}>
+            {mealNutrientsToShow?.map(({ amount, name }, index) => (
+              <div key={index}>
+                <Typography>{name}</Typography>
+                <div>{amount}</div>
+              </div>
+            ))}
+          </Stack>
+          <Typography>Ingredients</Typography>
+          <div>
+            {ingredients?.map(({ name, id }, index) => (
+              <span key={id + index}>{name}/ </span>
+            ))}
+          </div>
+        </CardContent>
+        <CardActions>
+          <Button
+            onClick={(e) => {
+              propToRender.functionToDispacth(mealItem, e);
             }}
+            variant="contained"
+            startIcon={propToRender.icon}
           >
-            <Typography>{title}</Typography>
-            <div>Price: ${pricePerServing}</div>
-            <Stack direction="row" spacing={2}>
-              {mealNutrientsToShow?.map(({ amount, name }, index) => (
-                <div key={index}>
-                  <Typography>{name}</Typography>
-                  <div>{amount}</div>
-                </div>
-              ))}
-            </Stack>
-            <Typography>Ingredients</Typography>
-            <div>
-              {ingredients?.map(({ name, id }, index) => (
-                <span key={id + index}>{name}/ </span>
-              ))}
-            </div>
-          </CardContent>
-          <CardActions>
-            <Button
-              onClick={() => {
-                deleteMealFromMenu(mealItem);
-              }}
-              variant="contained"
-            >
-              Delete
-            </Button>
-          </CardActions>
-        </Card>
-      )}
+            {propToRender.textToDisplay}
+          </Button>
+        </CardActions>
+      </Card>
       <ToastContainer />
     </>
   );
