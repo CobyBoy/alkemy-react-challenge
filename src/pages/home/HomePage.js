@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { getMeals } from '../../services/apiService';
 import { useDispatch, useSelector } from 'react-redux';
-import MealsList from '../../components/MealsList';
+import MealsList from '../../components/mealsList/MealsList';
 import AverageCard from '../../components/averageCard/AverageCard';
-import { getComplexMealsAction } from '../../store/mealReducer';
+import { getComplexMealsAction } from '../../store/slices/meal/mealReducer';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Grid from '@mui/material/Grid';
@@ -35,7 +35,6 @@ const HomePage = () => {
         dispatch(getComplexMealsAction.setMealsData(mealsCombined));
         console.log('primises', mealsArray, 'mealscombined', mealsCombined);
       });
-      //dispatch(getComplexMealsAction.getMealsData());
     }
     setLoading(false);
   }, [dispatch, mealsData.length]);

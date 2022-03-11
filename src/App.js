@@ -5,10 +5,11 @@ import PageNotFound from './components/pagenotfound/PageNotFound';
 import Login from './pages/login/LoginPage';
 import HomePage from './pages/home/HomePage';
 import { useSelector, useDispatch } from 'react-redux';
-import { authenticateAction } from './store/userReducer';
+import { authenticateAction } from './store/slices/user/userReducer';
 import SearchResults from './pages/searchResults/SearchResults';
 import Details from './pages/details/Details';
 import PrivateLayout from './pages/layout/PrivateLayout';
+import * as cacheService from './services/cacheService';
 import {
   INDEX_ROUTE,
   HOME_ROUTE,
@@ -27,7 +28,7 @@ const App = () => {
   let token = '';
 
   if (!isUserAuthenticated) {
-    token = localStorage.getItem('loginToken');
+    token = cacheService.getUserToken();
   }
 
   if (token) {

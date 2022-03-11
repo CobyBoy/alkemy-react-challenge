@@ -1,8 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import MealsList from '../../components/MealsList.jsx';
-//import TableContainer from '@mui/material/TableContainer';
+import MealsList from '../../components/mealsList/MealsList';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';

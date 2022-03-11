@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import MealsList from '../../components/MealsList';
-//import MealItem from '../../components/MealItem';
+import MealsList from '../../components/mealsList/MealsList';
 import { getMeals } from '../../services/apiService';
 import Grid from '@mui/material/Grid';
 import LoadingPage from '../../pages/loadingPage/LoadingPage';

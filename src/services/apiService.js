@@ -1,6 +1,7 @@
 import * as apiClient from '../api/api.client';
-import { authenticateAction } from './../store/userReducer';
+import { authenticateAction } from './../store/slices/user/userReducer';
 import * as logService from './logService';
+import * as cacheService from './cacheService';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const startLogin = async (values, dispatch) => {
@@ -8,7 +9,7 @@ export const startLogin = async (values, dispatch) => {
     const { data } = await apiClient.getLoginToken(values);
     if (data === undefined) throw new Error('Could not login');
     console.log('data startLogin apiService', data);
-    localStorage.setItem('loginToken', JSON.stringify(data.token));
+    cacheService.saveUserToken(JSON.stringify(data.token));
     dispatch(
       authenticateAction.authenticate({
         authenticated: true,

@@ -11,7 +11,7 @@ import styles from './styles';
 
 const LoginForm = () => {
   const initialValues = { email: 'challenge@alkemy.org', password: 'react' };
-  const isUserAuthenticated = useSelector(state => state.persistedReducer.user.authenticated);
+  const isUserAuthenticated = useSelector((state) => state.persistedReducer.user.authenticated);
   const dispatch = useDispatch();
   const fieldsToValidate = {
     email: Yup.string().email().required('email required'),

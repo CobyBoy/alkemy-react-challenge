@@ -17,7 +17,7 @@ const AverageCard = ({ meals }) => {
   });
 
   return (
-    <Card sx={{ width: '100%', margin: '2rem' }}>
+    <Card sx={styles.Card}>
       <CardContent>
         <Paper>
           <Typography style={(styles.CardSection, styles.CardContentTitle)}>
