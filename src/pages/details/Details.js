@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
-
+import styles  from './styles';
 import TableBody from '@mui/material/TableBody';
 import Paper from '@mui/material/Paper';
 
@@ -23,16 +23,20 @@ const Details = () => {
         <TableHead>
           <TableRow>
             <TableCell>
-              <Typography variant="h5">Title</Typography>
+              <Typography variant={styles.typoVariant()}>Title</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h5">Price</Typography>
+              <Typography variant={styles.typoVariant()}>Price</Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h5">Preparation Time</Typography>
+              <Typography variant={styles.typoVariant()}>
+                Preparation Time
+              </Typography>
             </TableCell>
             <TableCell>
-              <Typography variant="h5">Health Score</Typography>
+              <Typography variant={styles.typoVariant()}>
+                Health Score
+              </Typography>
             </TableCell>
           </TableRow>
         </TableHead>

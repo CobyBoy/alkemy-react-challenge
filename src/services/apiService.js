@@ -21,9 +21,9 @@ export const startLogin = async (values, dispatch) => {
   }
 };
 
-export const getMeals = async ({ diet, ingredients, query }) => {
+export const getMeals = async ({ number, diet, ingredients, query }) => {
   try {
-    const { data } = await apiClient.getComplexMeals(diet, ingredients, query);
+    const { data } = await apiClient.getComplexMeals(number, diet, ingredients, query);
 
     if (data === undefined) throw new Error('Could not fetch data from resource');
     if (data.results.length === 0) logService.infoMessage('No results found');

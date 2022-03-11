@@ -3,7 +3,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import * as apiService from '../../services/apiService';
 import { useSelector, useDispatch } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
 import SendIcon from '@mui/icons-material/Send';
 import 'react-toastify/dist/ReactToastify.css';
 import Button from '@mui/material/Button';
@@ -84,7 +83,6 @@ const LoginForm = () => {
               Submit
             </Button>
           </Box>
-          <ToastContainer />
         </Form>
       )}
     </Formik>

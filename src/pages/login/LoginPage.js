@@ -5,14 +5,15 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { ToastContainer } from 'react-toastify';
+import styles from './styles';
 
 const LoginPage = () => {
   return (
     <>
       <Container>
-        <Paper elevation={6}>
-          <Box m={2}>
-            <Typography align="center" variant="h5">
+        <Paper elevation={styles.paper.apply()}>
+          <Box style={styles.box}>
+            <Typography style={styles.typo} variant={styles.typo.variant()}>
               Login page. Welcome to blah blah blah
             </Typography>
           </Box>

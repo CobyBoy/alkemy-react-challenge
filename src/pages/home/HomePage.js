@@ -9,7 +9,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Grid from '@mui/material/Grid';
 import { useLocation } from 'react-router-dom';
-import LoadingPage from '../LoadingPage';
+import LoadingPage from '../loadingPage/LoadingPage';
+import styles from './styles';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const HomePage = () => {
         getMeals({ diet: 'vegan' }),
         getMeals({ ingredients: 'meat' }),
       ]).then((mealsArray) => {
-        mealsArray.map((mealArray) => {
+        mealsArray?.map((mealArray) => {
           console.log('elemtn', mealArray);
           mealArray?.map((meal) => {
             mealsCombined.push(meal);
@@ -32,7 +33,7 @@ const HomePage = () => {
         });
 
         dispatch(getComplexMealsAction.setMealsData(mealsCombined));
-        console.log('primises', mealsArray);
+        console.log('primises', mealsArray, 'mealscombined', mealsCombined);
       });
       //dispatch(getComplexMealsAction.getMealsData());
     }
@@ -46,7 +47,7 @@ const HomePage = () => {
           <LoadingPage />
         ))}
       <>
-        <Grid container display={'flex'}>
+        <Grid container style={styles.grid}>
           <MealsList meals={mealsData} pathname={pathname} />
           <AverageCard meals={mealsData} />
         </Grid>

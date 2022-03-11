@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { SEARCH_RESULTS_ROUTE } from '../../routes';
 import { Button } from '@mui/material';
+import Box from '@mui/material/Box';
 import styles from './styles';
 
 const Search = () => {
@@ -34,31 +35,32 @@ const Search = () => {
       >
         {({ handleChange }) => (
           <Form style={styles.Form}>
-            <label htmlFor="search" style={styles.Label}>
-              Search for meal
-            </label>
-            <Field
-              onChange={(e) => {
-                handleSearch(e, handleChange);
-              }}
-              onKeyDown={(e) => {
-                searchMeal(e);
-              }}
-              id="search"
-              type="text"
-              name="textSearch"
-              placeholder="Search for meal"
-              size="lg"
-              style={styles.InputField}
-            />
-            <ErrorMessage
-              name="textSearch"
-              component="div"
-              style={styles.ErrorMessage}
-            />
+            <Box style={styles.box}>
+              <label htmlFor="search" style={styles.Label}></label>
+              <Field
+                onChange={(e) => {
+                  handleSearch(e, handleChange);
+                }}
+                onKeyDown={(e) => {
+                  searchMeal(e);
+                }}
+                id="search"
+                type="text"
+                name="textSearch"
+                placeholder="Search for meal"
+                size="lg"
+                style={styles.InputField}
+                ref={el => console.log('reff', el)}
+              />
+              <ErrorMessage
+                name="textSearch"
+                component="div"
+                style={styles.ErrorMessage}
+              />  
+            </Box>
             <Button
-              sx={{ color: 'inherit', border: '1px solid #ffffff' }}
-              variant="outlined"
+              sx={styles.button}
+              variant={styles.button.variant()}
               onClick={(e) => searchMeal(e)}
             >
               Search
