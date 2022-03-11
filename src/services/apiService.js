@@ -26,10 +26,12 @@ export const getMeals = async ({ diet, ingredients, query }) => {
     const { data } = await apiClient.getComplexMeals(diet, ingredients, query);
 
     if (data === undefined) throw new Error('Could not fetch data from resource');
+    if (data.results.length === 0) logService.infoMessage('No results found');
 
     console.log('getMeals api service', data);
     return data.results;
   } catch (error) {
-    logService.logError(error.response.data.message);
+    if(!error.response.data.message) logService.logError(error.message);
+    else logService.logError(error.response.data.message);
   }
 };

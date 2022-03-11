@@ -17,4 +17,8 @@ export const logError = (message) => {
 
 export const showSuccessMessage = (message) => {
   toast.success(message, toastStyle);
+  
+};
+export const infoMessage = (message) => {
+  toast.info(message, toastStyle);
 };
