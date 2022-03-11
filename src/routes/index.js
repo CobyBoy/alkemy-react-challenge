@@ -1,4 +1,4 @@
-export const INDEX_ROUTE = '/';
+export const INDEX_ROUTE = '';
 export const HOME_ROUTE = '/home';
 export const DETAILS_ROUTE ='/details';
 export const DETAILS_ID_ROUTE = '/details/:id';

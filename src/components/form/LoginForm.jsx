@@ -77,8 +77,8 @@ const LoginForm = () => {
             <Button type="submit" disabled={isSubmitting} variant="contained">
               Submit
             </Button>
-            <ToastContainer />
           </Box>
+          <ToastContainer />
         </Form>
       )}
     </Formik>

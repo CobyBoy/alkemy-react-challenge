@@ -8,7 +8,9 @@ const MealsList = ({ meals, pathname }) => {
   return (
     <>
       {pathname === HOME_ROUTE || pathname === SEARCH_RESULTS_ROUTE
-        ? meals.map((meal) => <MealItem key={meal.id} mealItem={meal} />)
+        ? meals.map((meal) => (
+          <MealItem key={meal.id} mealItem={meal} pathname={pathname}/>
+        ))
         : pathname === DETAILS_ROUTE &&
           meals.map((meal) => <DetailItem key={meal.id} mealItem={meal} />)}
     </>

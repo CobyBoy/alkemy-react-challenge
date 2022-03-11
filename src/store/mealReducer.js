@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 const initialState = {
   data: [],
@@ -12,6 +12,14 @@ const mealSlice = createSlice({
       console.log('setMealsData state', state, 'action', action);
       state.data = action.payload;
     },
+    addMeal(state, action) {
+      console.log('adding meal', state, action);
+      state.data.push(action.payload);
+    },
+    clearOnLogOut(state) {
+      state.data = [];
+      console.log('clearOnLogOut',current(state));
+    }
   },
 });
 

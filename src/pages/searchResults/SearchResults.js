@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import MealsList from '../../components/MealsList';
 //import MealItem from '../../components/MealItem';
 import { getMeals } from '../../services/apiService';
@@ -32,6 +33,7 @@ const SearchResults = () => {
       )}
       <div>searchResults</div>
       <MealsList meals={mealSearched} pathname={pathname}></MealsList>
+      <ToastContainer/>
     </>
   );
 };

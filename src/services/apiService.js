@@ -1,14 +1,11 @@
 import * as apiClient from '../api/api.client';
 import { authenticateAction } from './../store/userReducer';
 import * as logService from './logService';
-//import { getComplexMealsAction } from '../store/mealReducer';
-
 import 'react-toastify/dist/ReactToastify.css';
 
 export const startLogin = async (values, dispatch) => {
   try {
     const { data } = await apiClient.getLoginToken(values);
-    logService.showSuccessMessage('Successful login');
     if (data === undefined) throw new Error('Could not login');
     console.log('data startLogin apiService', data);
     localStorage.setItem('loginToken', JSON.stringify(data.token));
