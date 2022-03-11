@@ -16,6 +16,10 @@ const mealSlice = createSlice({
       console.log('adding meal', state, action);
       state.data.push(action.payload);
     },
+    deleteMealFromMenu(state, action) {
+      console.log('deleteMeal', state.data, action);
+      state.data = state.data.filter((currentMeal) => currentMeal.id !== action.payload);
+    },
     clearOnLogOut(state) {
       state.data = [];
       console.log('clearOnLogOut',current(state));

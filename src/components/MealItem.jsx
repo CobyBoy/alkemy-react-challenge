@@ -64,6 +64,11 @@ const MealItem = ({ mealItem, pathname }) => {
     }
   };
 
+  const deleteMealFromMenu = (mealToDelete) => {
+    console.log('Meal to delete', mealToDelete);
+    dispatch(getComplexMealsAction.deleteMealFromMenu(mealToDelete.id));
+  };
+
   return (
     <>
       {pathname === SEARCH_RESULTS_ROUTE ? (
@@ -73,10 +78,10 @@ const MealItem = ({ mealItem, pathname }) => {
             margin: '2rem',
             minWidth: '25rem',
             minHeight: '33rem',
-            cursor: 'pointer',
           }}
         >
           <CardContent
+            sx={{ cursor: 'pointer' }}
             onClick={() => {
               handleClick();
             }}
@@ -125,9 +130,6 @@ const MealItem = ({ mealItem, pathname }) => {
             minWidth: '25rem',
             minHeight: '33rem',
           }}
-          onClick={() => {
-            handleClick();
-          }}
         >
           <CardMedia
             component="img"
@@ -136,7 +138,12 @@ const MealItem = ({ mealItem, pathname }) => {
             height="50%"
             alt={title}
           />
-          <CardContent>
+          <CardContent
+            sx={{ cursor: 'pointer' }}
+            onClick={() => {
+              handleClick();
+            }}
+          >
             <Typography>{title}</Typography>
             <div>Price: ${pricePerServing}</div>
             <Stack direction="row" spacing={2}>
@@ -154,6 +161,16 @@ const MealItem = ({ mealItem, pathname }) => {
               ))}
             </div>
           </CardContent>
+          <CardActions>
+            <Button
+              onClick={() => {
+                deleteMealFromMenu(mealItem);
+              }}
+              variant="contained"
+            >
+              Delete
+            </Button>
+          </CardActions>
         </Card>
       )}
       <ToastContainer />
