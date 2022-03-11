@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import * as apiService from '../../services/apiService';
 import { useSelector, useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
+import SendIcon from '@mui/icons-material/Send';
 import 'react-toastify/dist/ReactToastify.css';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -74,7 +75,12 @@ const LoginForm = () => {
           </Box>
 
           <Box sx={styles.Box}>
-            <Button type="submit" disabled={isSubmitting} variant="contained">
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              variant="contained"
+              endIcon={<SendIcon />}
+            >
               Submit
             </Button>
           </Box>

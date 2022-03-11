@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import MealsList from '../../components/MealsList';
 import AverageCard from '../../components/averageCard/AverageCard';
 import { getComplexMealsAction } from '../../store/mealReducer';
-import Search from '../../components/search/Search';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Grid from '@mui/material/Grid';
@@ -42,12 +41,9 @@ const HomePage = () => {
 
   return (
     <>
-      <Search></Search>
       {loading ||
         (!mealsData.length && (
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <LoadingPage />
-          </div>
+          <LoadingPage />
         ))}
       <>
         <Grid container display={'flex'}>
