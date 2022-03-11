@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { authenticateAction } from './store/userReducer';
 import SearchResults from './pages/searchResults/SearchResults';
 import Details from './pages/details/Details';
+import PrivateLayout from './pages/PrivateLayout';
 import {
   INDEX_ROUTE,
   HOME_ROUTE,
@@ -15,6 +16,7 @@ import {
   NOTFOUND_ROUTE,
   DETAILS_ROUTE,
 } from './routes';
+
 
 
 const App = () => {
@@ -47,12 +49,15 @@ const App = () => {
             </PublicRoutes>
           }
         ></Route>
-
         <Route
-          element={<PrivateRoutes isAuthenticated={isUserAuthenticated} />}
+          element={
+            <PrivateLayout>
+              <PrivateRoutes isAuthenticated={isUserAuthenticated} />
+            </PrivateLayout>
+          }
         >
           <Route path={HOME_ROUTE} element={<HomePage />}></Route>
-          <Route path={DETAILS_ROUTE} element={<Details/>}></Route>
+          <Route path={DETAILS_ROUTE} element={<Details />}></Route>
           <Route
             path={SEARCH_RESULTS_FULL_ROUTE}
             element={<SearchResults />}
