@@ -50,7 +50,6 @@ const Search = () => {
                 placeholder="Search for meal"
                 size="lg"
                 style={styles.InputField}
-                ref={el => console.log('reff', el)}
               />
               <ErrorMessage
                 name="textSearch"
