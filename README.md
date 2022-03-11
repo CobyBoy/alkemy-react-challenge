@@ -1,18 +1,8 @@
 ## To do
-Define styling because this one is awful .\
-Search page ( * ),.\
-Details page ( * ),.\
-Delete dishes ( * ).\
 Tests.\
-Change to TypeScript.\
+Change to TypeScript. 
 
 (*) Couldn't finish due to endpoint request limits 
-
-
-
-
-
-
 ## Available Scripts
 
 In the project directory, you can run:
