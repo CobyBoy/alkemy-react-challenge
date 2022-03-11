@@ -1,8 +1,11 @@
 import React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 const LoadingPage = () => {
+
   return (
-    <CircularProgress>LoadingPage</CircularProgress>
+    <div style={{ display: 'flex', justifyContent: 'center', margin: '5rem' }}>
+      <CircularProgress />
+    </div>
   );
 };
 
