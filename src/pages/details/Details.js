@@ -14,7 +14,6 @@ import Paper from '@mui/material/Paper';
 const Details = () => {
   let { pathname } = useLocation();
   const meals = useSelector((state) => state.persistedReducer.meals.data);
-  console.log('meals', meals);
 
   return (
     <Paper elevation={8}>

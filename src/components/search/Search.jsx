@@ -18,7 +18,6 @@ const Search = () => {
           textSearch: Yup.string().min(2).required('Min value must be 2'),
         })}
         onSubmit={(values, { setSubmitting, resetForm }) => {
-          console.log('search submit', values);
           logService.infoMessage('Searching...');
           navigate(`${SEARCH_RESULTS_ROUTE}?query=${values.textSearch}`);
           setSubmitting(false);
