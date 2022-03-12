@@ -11,14 +11,15 @@ import Stack from '@mui/material/Stack';
 import { useDispatch, useSelector } from 'react-redux';
 import { getComplexMealsAction } from '../../store/slices/meal/mealReducer';
 import * as logService from '../../services/logService';
-import { ToastContainer } from 'react-toastify';
 import styles from './style';
 
 const MealItem = ({ mealItem, pathname }) => {
-  const { title, image, pricePerServing, nutrition} = mealItem;
+  const { title, image, pricePerServing, nutrition, vegan} = mealItem;
   const currentMeals = useSelector((state) => state.persistedReducer.meals.data);
   const dispatch = useDispatch();
-  let navigate = useNavigate();
+  let navigate = useNavigate(); 
+  const ADD = 'Add to menu';
+  const DELETE = 'Delete';
   let propToRender = {
     textToDisplay: '',
     functionToDispacth: () => { },
@@ -27,20 +28,18 @@ const MealItem = ({ mealItem, pathname }) => {
 
   const functionReassign = (meal, e) => {
     console.log('funciton reassiing', meal, e);
-    e.target.textContent == 'Add it'
-      ? addToMenu(meal)
-      : deleteMealFromMenu(meal);
+    e.target.textContent == ADD ? addToMenu(meal) : deleteMealFromMenu(meal);
     
   };
 
 
   if (pathname === SEARCH_RESULTS_ROUTE) {
-    propToRender.textToDisplay = 'Add to menu';
+    propToRender.textToDisplay = ADD;
     propToRender.functionToDispacth = functionReassign;
     propToRender.icon;
   }
   else {
-    propToRender.textToDisplay = 'Delete';
+    propToRender.textToDisplay = DELETE;
     propToRender.functionToDispacth = functionReassign;
     propToRender.icon = <DeleteIcon/>;
   }
@@ -63,6 +62,15 @@ const MealItem = ({ mealItem, pathname }) => {
 
   const handleClick = () => {
     navigate(`${DETAILS_ROUTE}`);
+  };
+
+  const renderButtonStyle = () => {
+    return {
+      width: '96%',
+      position: 'absolute',
+      bottom: '0.5rem',
+      backgroundColor: vegan ? '#19d21f' : '#1976d2', //#19d21f
+    };
   };
 
   const addToMenu = (mealToAdd) => {
@@ -100,24 +108,18 @@ const MealItem = ({ mealItem, pathname }) => {
   return (
     <>
       <Card sx={styles.Card}>
+        <CardMedia component="img" image={image} alt={title} />
         <CardContent
           sx={styles.CardContent}
           onClick={() => {
             handleClick();
           }}
         >
-          <CardMedia
-            component="img"
-            image={image}
-            style={styles.CardMedia}
-            alt={title}
-          />
-
           <Typography>{title}</Typography>
           <div>Price: ${pricePerServing}</div>
           <Stack direction="row" spacing={2}>
             {mealNutrientsToShow?.map(({ amount, name }, index) => (
-              <div key={index}>
+              <div key={index + name}>
                 <Typography>{name}</Typography>
                 <div>{amount}</div>
               </div>
@@ -130,19 +132,19 @@ const MealItem = ({ mealItem, pathname }) => {
             ))}
           </div>
         </CardContent>
-        <CardActions>
+        <CardActions style={styles.CardActions}>
           <Button
             onClick={(e) => {
               propToRender.functionToDispacth(mealItem, e);
             }}
             variant="contained"
+            style={renderButtonStyle()}
             startIcon={propToRender.icon}
           >
             {propToRender.textToDisplay}
           </Button>
         </CardActions>
       </Card>
-      <ToastContainer />
     </>
   );
 };

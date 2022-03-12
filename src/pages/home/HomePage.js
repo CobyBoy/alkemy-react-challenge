@@ -11,20 +11,27 @@ import Grid from '@mui/material/Grid';
 import { useLocation } from 'react-router-dom';
 import LoadingPage from '../loadingPage/LoadingPage';
 import styles from './styles';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const mealsData = useSelector((state) => state.persistedReducer.meals.data);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  const resolvePromises = () => {
+    return Promise.all([
+      getMeals({ diet: 'vegan' }),
+      getMeals({ ingredients: 'meat' }),
+    ]);
+  };
 
   useEffect(() => {
     let mealsCombined = [];
     if (mealsData.length === 0) {
-      Promise.all([
-        getMeals({ diet: 'vegan' }),
-        getMeals({ ingredients: 'meat' }),
-      ]).then((mealsArray) => {
+      setLoading(true);
+      resolvePromises().then((mealsArray) => {
         mealsArray?.map((mealArray) => {
           console.log('elemtn', mealArray);
           mealArray?.map((meal) => {
@@ -33,24 +40,27 @@ const HomePage = () => {
         });
 
         dispatch(getComplexMealsAction.setMealsData(mealsCombined));
+        setLoading(false);
         console.log('primises', mealsArray, 'mealscombined', mealsCombined);
       });
     }
-    setLoading(false);
-  }, [dispatch, mealsData.length]);
+  }, []);
+
+  
 
   return (
     <>
-      {loading ||
-        (!mealsData.length && (
-          <LoadingPage />
-        ))}
-      <>
-        <Grid container style={styles.grid}>
-          <MealsList meals={mealsData} pathname={pathname} />
-          <AverageCard meals={mealsData} />
-        </Grid>
-      </>
+      {loading && <LoadingPage />}
+      {!loading && mealsData.length === 0 && (
+        <Container>
+          <Typography style={styles.Typo}>Use the search bar to add meals to the menu. You can add 2 vegan and 2 non vegan meals to your menu</Typography>
+        </Container>
+      )}
+      <Grid container style={styles.Grid}>
+        <MealsList meals={mealsData} pathname={pathname} />
+        <AverageCard meals={mealsData} />
+      </Grid>
+
       <ToastContainer />
     </>
   );

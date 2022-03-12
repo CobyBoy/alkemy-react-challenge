@@ -1,9 +1,11 @@
-const grid = {
+const Grid = {
   display: 'flex'
 };
+const Typo = { textAlign: 'center', margin: '5rem' };
 
 const styles = {
-  grid
+  Grid,
+  Typo,
 };
 
 export default styles;

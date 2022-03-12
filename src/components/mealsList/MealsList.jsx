@@ -15,6 +15,7 @@ const MealsList = ({ meals, pathname }) => {
         ))
         : isDetailsRoute &&
           meals?.map((meal) => <DetailItem key={meal.id} mealItem={meal} />)}
+      
     </>
   );
 };

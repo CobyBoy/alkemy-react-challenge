@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import MealsList from '../../components/mealsList/MealsList';
 import { getMeals } from '../../services/apiService';
 import Grid from '@mui/material/Grid';
 import LoadingPage from '../../pages/loadingPage/LoadingPage';
+import styles from './style';
+import { ToastContainer } from 'react-toastify';
 
 const SearchResults = () => {
 
@@ -35,13 +36,13 @@ const SearchResults = () => {
         'search',
         search
       )}
-      {loading || mealSearched.length === 0 ? <LoadingPage /> : (
-        <Grid container>
+      {loading || mealSearched.length === 0 ? (
+        <LoadingPage />
+      ) : (
+        <Grid container style={styles.grid}>
           <MealsList meals={mealSearched} pathname={pathname}></MealsList>
         </Grid>
       )}
-      
-
       <ToastContainer />
     </>
   );
