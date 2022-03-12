@@ -11,14 +11,25 @@ const toastStyle = {
   progress: undefined,
   pauseOnFocusLoss: false,
 };
+/**
+ * 
+ * @param {string} message 
+ */
 export const logError = (message) => {
   toast.error(message, toastStyle);
 };
-
+/**
+ * 
+ * @param {string} message 
+ */
 export const showSuccessMessage = (message) => {
   toast.success(message, toastStyle);
   
 };
+/**
+ * 
+ * @param {string} message 
+ */
 export const infoMessage = (message) => {
   toast.info(message, toastStyle);
 };

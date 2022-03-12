@@ -4,6 +4,12 @@ import * as logService from './logService';
 import * as cacheService from './cacheService';
 import 'react-toastify/dist/ReactToastify.css';
 
+/**
+ * 
+ * @param {Object} values 
+ * @param {Dispatch<any>} dispatch 
+ * @returns {Object}
+ */
 export const startLogin = async (values, dispatch) => {
   try {
     const { data } = await apiClient.getLoginToken(values);
@@ -21,7 +27,11 @@ export const startLogin = async (values, dispatch) => {
     logService.logError(error.response.data.error);
   }
 };
-
+/**
+ * 
+ * @param {object} param0 
+ * @returns {Array<T>}
+ */
 export const getMeals = async ({ number, diet, ingredients, query }) => {
   try {
     const { data } = await apiClient.getComplexMeals(number, diet, ingredients, query);
