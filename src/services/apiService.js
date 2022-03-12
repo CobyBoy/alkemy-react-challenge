@@ -23,7 +23,7 @@ export const startLogin = async (values, dispatch) => {
     );
     return data;
   } catch (error) {
-    logService.logError(error.response.data.error);
+    logService.logError(error?.response?.data?.error);
   }
 };
 /**
@@ -41,6 +41,6 @@ export const getMeals = async ({ number, diet, ingredients, query }) => {
     return data.results;
   } catch (error) {
     if(!error.response.data.message) logService.logError(error.message);
-    else logService.logError(error.response.data.message);
+    else logService.logError(error?.response?.data?.message);
   }
 };
