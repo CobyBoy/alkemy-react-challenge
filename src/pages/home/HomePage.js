@@ -20,14 +20,18 @@ const HomePage = () => {
   const mealsData = useSelector((state) => state.persistedReducer.meals.data);
   const [loading, setLoading] = useState(false);
 
+  const resolvePromises = () => {
+    return Promise.all([
+      getMeals({ diet: 'vegan' }),
+      getMeals({ ingredients: 'meat' }),
+    ]);
+  };
+
   useEffect(() => {
     let mealsCombined = [];
     if (mealsData.length === 0) {
       setLoading(true);
-      Promise.all([
-        getMeals({ diet: 'vegan' }),
-        getMeals({ ingredients: 'meat' }),
-      ]).then((mealsArray) => {
+      resolvePromises().then((mealsArray) => {
         mealsArray?.map((mealArray) => {
           console.log('elemtn', mealArray);
           mealArray?.map((meal) => {
@@ -41,6 +45,8 @@ const HomePage = () => {
       });
     }
   }, []);
+
+  
 
   return (
     <>
