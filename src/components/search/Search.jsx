@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -10,20 +10,27 @@ import styles from './styles';
 const Search = () => {
   const [searchText, setSearchText] = useState('');
   let navigate = useNavigate();
-  const handleSearch = (e, handleChange) => {
+ 
+  
+  const handleSearch = useCallback((e, handleChange) => {
     handleChange(e);
     let value = e.target.value;
     if (value.length >= 2) {
       setSearchText(value);
     }
-  };
+  }, []);
+  
+  
 
-  const searchMeal = (e) => {
-    if ((e.key === 'Enter' || e.type == 'click') && searchText.length >= 2) {
-      setSearchText('');
-      navigate(`${SEARCH_RESULTS_ROUTE}?query=${searchText}`);
-    }
-  };
+  const searchMeal = useCallback(
+    (e) => {
+      if ((e.key === 'Enter' || e.type == 'click') && searchText.length >= 2) {
+        setSearchText('');
+        navigate(`${SEARCH_RESULTS_ROUTE}?query=${searchText}`);
+      }
+    },
+    [navigate, searchText]
+  );
 
   return (
     <>
