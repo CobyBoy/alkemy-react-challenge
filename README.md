@@ -3,6 +3,9 @@ Tests.\
 Change to TypeScript. 
 
 (*) Couldn't finish due to endpoint request limits 
+
+## Screenshots
+![imagen](https://user-images.githubusercontent.com/47018795/158022478-6da5c899-8421-4208-af31-807f497d98d8.png)
 ## Available Scripts
 
 In the project directory, you can run:
