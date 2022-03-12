@@ -6,7 +6,13 @@ Change to TypeScript.
 
 ## Screenshots
 ![imagen](https://user-images.githubusercontent.com/47018795/158022478-6da5c899-8421-4208-af31-807f497d98d8.png)
-## Available Scripts
+
+## Error Screenshots
+![imagen](https://user-images.githubusercontent.com/47018795/158022644-7574a905-6a53-4af2-96cc-0240be33d6fc.png)
+
+![imagen](https://user-images.githubusercontent.com/47018795/158022674-2ec43ef0-5472-4aa7-bd3a-0b83c456f607.png)
+
+![imagen](https://user-images.githubusercontent.com/47018795/158022776-948fb54b-1e77-42b4-9580-64252c61ad16.png)
 
 In the project directory, you can run:
 
