@@ -36,10 +36,10 @@ const HomePage = () => {
         });
 
         dispatch(getComplexMealsAction.setMealsData(mealsCombined));
+        setLoading(false);
         console.log('primises', mealsArray, 'mealscombined', mealsCombined);
       });
     }
-    setLoading(false);
   }, []);
 
   return (
