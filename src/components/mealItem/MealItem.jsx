@@ -14,7 +14,7 @@ import * as logService from '../../services/logService';
 import styles from './style';
 
 const MealItem = ({ mealItem, pathname }) => {
-  const { title, image, pricePerServing, nutrition} = mealItem;
+  const { title, image, pricePerServing, nutrition, vegan} = mealItem;
   const currentMeals = useSelector((state) => state.persistedReducer.meals.data);
   const dispatch = useDispatch();
   let navigate = useNavigate(); 
@@ -62,6 +62,15 @@ const MealItem = ({ mealItem, pathname }) => {
 
   const handleClick = () => {
     navigate(`${DETAILS_ROUTE}`);
+  };
+
+  const renderButtonStyle = () => {
+    return {
+      width: '96%',
+      position: 'absolute',
+      bottom: '0.5rem',
+      backgroundColor: vegan ? '#19d21f' : '#1976d2', //#19d21f
+    };
   };
 
   const addToMenu = (mealToAdd) => {
@@ -129,7 +138,7 @@ const MealItem = ({ mealItem, pathname }) => {
               propToRender.functionToDispacth(mealItem, e);
             }}
             variant="contained"
-            style={styles.Button}
+            style={renderButtonStyle()}
             startIcon={propToRender.icon}
           >
             {propToRender.textToDisplay}
