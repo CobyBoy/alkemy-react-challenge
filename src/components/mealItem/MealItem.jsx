@@ -35,12 +35,12 @@ const MealItem = ({ mealItem, pathname }) => {
 
 
   if (pathname === SEARCH_RESULTS_ROUTE) {
-    propToRender.textToDisplay = 'Add it';
+    propToRender.textToDisplay = 'Add to menu';
     propToRender.functionToDispacth = functionReassign;
     propToRender.icon;
   }
   else {
-    propToRender.textToDisplay = 'Delete it';
+    propToRender.textToDisplay = 'Delete';
     propToRender.functionToDispacth = functionReassign;
     propToRender.icon = <DeleteIcon/>;
   }
@@ -71,23 +71,23 @@ const MealItem = ({ mealItem, pathname }) => {
     let notVeganMeals = currentMeals.filter((currentMeal) => !currentMeal?.vegan).length;
 
     if (currentMeals.length === 4) {
-      logService.logError('Sorry, the menu is full. Meal cant be added');
+      logService.logError('Sorry, menu is full. Meal can\'t be added');
     }
     else
     if (mealToAdd?.vegan && veganMeals >= 2) {
-      logService.logError('Sorry, meal cant be added. There are already two vegan meals on menu');
+      logService.logError('Sorry, meal can\'t be added. There are already two vegan meals on menu');
     }else
     if (!mealToAdd?.vegan && notVeganMeals >= 2) {
       logService.logError(
-        'Sorry, meal cant be added. there are already two non vegan meals on menu'
+        'Sorry, meal can\'t be added. There are already two non vegan meals on menu'
       );
     }
     else if (currentMeals.some(current => current.id === mealToAdd?.id)) {
-      logService.logError('Sorry, meal is already on the menu');
+      logService.logError('Meal is already on the menu');
     }
     else {
-      logService.showSuccessMessage('Success. Meal added to menu');
       dispatch(getComplexMealsAction.addMeal(mealItem));
+      logService.showSuccessMessage('Success. Meal added to menu');
     }
   };
 
