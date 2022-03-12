@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import * as apiService from '../../services/apiService';
+import * as logService from '../../services/logService';
 import { useSelector, useDispatch } from 'react-redux';
 import SendIcon from '@mui/icons-material/Send';
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,6 +23,7 @@ const LoginForm = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={(values, { setSubmitting, resetForm }) => {
+        logService.infoMessage('Loggin in... Please wait...');
         apiService.startLogin(values, dispatch);
         setSubmitting(false);
         resetForm();
