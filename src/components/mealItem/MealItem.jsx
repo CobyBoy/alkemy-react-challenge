@@ -25,7 +25,11 @@ const MealItem = ({ mealItem, pathname }) => {
     functionToDispacth: () => { },
     icon: ''
   };
-
+  /**
+ * 
+ * @param {Object} meal 
+ * @param {React.MouseEvent} e 
+ */
   const functionReassign = (meal, e) => {
     console.log('funciton reassiing', meal, e);
     e.target.textContent == ADD ? addToMenu(meal) : deleteMealFromMenu(meal);
