@@ -1,4 +1,3 @@
-import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +9,6 @@ import * as logService from '../../services/logService';
 
 const Search = () => {
   let navigate = useNavigate();
-
 
   return (
     <>
