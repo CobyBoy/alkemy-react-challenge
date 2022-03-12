@@ -6,7 +6,7 @@ import MealItem from '../mealItem/MealItem';
 const MealsList = ({ meals, pathname }) => {
   const isHomeOrSearchRoute = pathname === HOME_ROUTE || pathname === SEARCH_RESULTS_ROUTE;
   const isDetailsRoute = pathname === DETAILS_ROUTE;
-  console.log('pathname meallist', pathname);
+  
   return (
     <>
       {isHomeOrSearchRoute

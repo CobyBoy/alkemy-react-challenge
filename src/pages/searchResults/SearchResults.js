@@ -19,8 +19,6 @@ const SearchResults = () => {
     
   useEffect(() => {
     getMeals({ number:20, query: queryString }).then((res) => {
-      console.log('query on Search', res);
-      console.log('query?', queryString);
       if (res === undefined) { setMealSearched([]); return; }
       setMealSearched(res);
       setLoading(false);
@@ -28,14 +26,6 @@ const SearchResults = () => {
   }, [queryString]);
   return (
     <>
-      {console.log(
-        'params mealSearched',
-        mealSearched,
-        'pathname',
-        pathname,
-        'search',
-        search
-      )}
       {loading || mealSearched.length === 0 ? (
         <LoadingPage />
       ) : (

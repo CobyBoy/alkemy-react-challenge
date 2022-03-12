@@ -33,7 +33,6 @@ const HomePage = () => {
       setLoading(true);
       resolvePromises().then((mealsArray) => {
         mealsArray?.map((mealArray) => {
-          console.log('elemtn', mealArray);
           mealArray?.map((meal) => {
             mealsCombined.push(meal);
           });
@@ -41,7 +40,6 @@ const HomePage = () => {
 
         dispatch(getComplexMealsAction.setMealsData(mealsCombined));
         setLoading(false);
-        console.log('primises', mealsArray, 'mealscombined', mealsCombined);
       });
     }
   }, []);

@@ -5,7 +5,6 @@ import TableRow from '@mui/material/TableRow';
 
 const DetailItem = ({ mealItem }) => {
   const { title, pricePerServing, readyInMinutes, healthScore } = mealItem;
-  console.log('receing meal from dwatilitme', mealItem);
   return (
     <TableRow>
       <TableCell>

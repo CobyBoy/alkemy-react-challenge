@@ -31,7 +31,6 @@ const MealItem = ({ mealItem, pathname }) => {
  * @param {React.MouseEvent} e 
  */
   const functionReassign = (meal, e) => {
-    console.log('funciton reassiing', meal, e);
     e.target.textContent == ADD ? addToMenu(meal) : deleteMealFromMenu(meal);
     
   };
@@ -78,7 +77,6 @@ const MealItem = ({ mealItem, pathname }) => {
   };
 
   const addToMenu = (mealToAdd) => {
-    console.log('addToMenu', mealToAdd);
     let veganMeals = currentMeals.filter((currentMeal) => currentMeal?.vegan).length;
     let notVeganMeals = currentMeals.filter((currentMeal) => !currentMeal?.vegan).length;
 
@@ -104,7 +102,6 @@ const MealItem = ({ mealItem, pathname }) => {
   };
 
   const deleteMealFromMenu = (mealToDelete) => {
-    console.log('Meal to delete', mealToDelete);
     dispatch(getComplexMealsAction.deleteMealFromMenu(mealToDelete.id));
     logService.showSuccessMessage('Meal deleted successfully');
   };
