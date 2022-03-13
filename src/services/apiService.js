@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
  * 
  * @param {Object} values 
  * @param {Dispatch<any>} dispatch 
- * @returns {Object}
+ * @returns {string}
  */
 export const startLogin = async (values, dispatch) => {
   try {
@@ -21,7 +21,7 @@ export const startLogin = async (values, dispatch) => {
         token: data.token,
       })
     );
-    return data;
+    return data.token;
   } catch (error) {
     logService.logError(error?.response?.data?.error);
   }

@@ -1,12 +1,11 @@
 import axios from 'axios';
 import { api_base, api } from '../constants/api';
 
-// eslint-disable-next-line no-undef
 const API_KEY = process.env.REACT_APP_API_KEY;
 /**
  * 
  * @param {Object} data 
- * @returns {Object}
+ * @returns {Promise}
  */
 export const getLoginToken = (data) => axios.post(api_base.BASE_API_URL, data);
 /**

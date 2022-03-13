@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import styles from './styles';
 
 const LoginForm = () => {
-  const initialValues = { email: 'challenge@alkemy.org', password: 'react' };
+  const initialValues = { email: '', password: '' };
   const dispatch = useDispatch();
   const fieldsToValidate = {
     email: Yup.string().email().required('email required'),
@@ -30,7 +30,7 @@ const LoginForm = () => {
       validationSchema={Yup.object(fieldsToValidate)}
     >
       {({ isSubmitting }) => (
-        <Form>
+        <Form id="loginForm" role={'form'} data-testid="form">
           <Box sx={styles.Box}>
             <label htmlFor="email" style={styles.Label}>
               Email address
@@ -44,6 +44,7 @@ const LoginForm = () => {
                 placeholder="challenge@alkemy.org"
                 size="lg"
                 style={styles.InputField}
+                required
               />
               <ErrorMessage
                 name="email"
@@ -76,6 +77,7 @@ const LoginForm = () => {
           <Box sx={styles.Box}>
             <Button
               type="submit"
+              id="loginButton"
               disabled={isSubmitting}
               variant="contained"
               endIcon={<SendIcon />}
