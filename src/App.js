@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import PublicRoutes from './routes/public/PublicRoutes';
 import PrivateRoutes from './routes/private/PrivateRoutes';
-import PageNotFound from './components/pagenotfound/PageNotFound';
+import PageNotFound from './pages/pageNotFound/PageNotFound';
 import { useSelector, useDispatch } from 'react-redux';
 import { authenticateAction } from './store/slices/user/userReducer';
 import * as cacheService from './services/cacheService';
