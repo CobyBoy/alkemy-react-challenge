@@ -10,7 +10,7 @@ const AverageCard = ({ meals }) => {
   let preparationTimeSum = 0;
   let healthScoreSum = 0;
 
-  meals.map((meal) => {
+  meals?.map((meal) => {
     priceSum += meal.pricePerServing;
     preparationTimeSum += meal.readyInMinutes / meals.length;
     healthScoreSum += meal.healthScore / meals.length;
