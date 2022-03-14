@@ -29,7 +29,7 @@ const HomePage = () => {
 
   useEffect(() => {
     let mealsCombined = [];
-    if (mealsData.length === 0) {
+    if (mealsData?.length === 0) {
       setLoading(true);
       resolvePromises().then((mealsArray) => {
         mealsArray?.map((mealArray) => {
@@ -39,7 +39,7 @@ const HomePage = () => {
         });
 
         dispatch(getComplexMealsAction.setMealsData(mealsCombined));
-        setLoading(false);
+        if (mealsCombined.length !== 0) setLoading(false);
       });
     }
   }, []);
@@ -48,11 +48,18 @@ const HomePage = () => {
 
   return (
     <>
-      {loading && <LoadingPage />}
-      {!loading && mealsData.length === 0 && (
-        <Container>
-          <Typography style={styles.Typo}>Use the search bar to add meals to the menu. You can add 2 vegan and 2 non vegan meals to your menu</Typography>
-        </Container>
+      {loading && mealsData?.length === 0 ? (
+        <LoadingPage />
+      ) : (
+        !loading &&
+        mealsData?.length === 0 && (
+          <Container>
+            <Typography style={styles.Typo}>
+              Use the search bar to add meals to the menu. You can add 2 vegan
+              and 2 non vegan meals to your menu
+            </Typography>
+          </Container>
+        )
       )}
       <Grid container style={styles.Grid}>
         <MealsList meals={mealsData} pathname={pathname} />
