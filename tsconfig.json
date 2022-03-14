@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "allowJs": true,
+        "target": "ES2022",
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "noEmit": true,
+        "jsx": "react",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+    },
+    "include": [
+        "./src/**/*.ts"
+    ],
+    
+}

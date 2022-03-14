@@ -18,8 +18,11 @@ const SearchResults = () => {
   const [loading, setLoading] = useState(true);
     
   useEffect(() => {
-    getMeals({ number:20, query: queryString }).then((res) => {
-      if (res === undefined) { setMealSearched([]); return; }
+    getMeals({ resultsRequested: 20, query: queryString }).then((res) => {
+      if (res === undefined) {
+        setMealSearched([]);
+        return;
+      }
       setMealSearched(res);
       setLoading(false);
     });

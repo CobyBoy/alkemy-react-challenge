@@ -1,7 +1,7 @@
-import { toast } from 'react-toastify';
+import { toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const toastStyle = {
+const toastStyle: ToastOptions = {
   position: 'top-center',
   autoClose: 4000,
   hideProgressBar: false,
@@ -11,25 +11,15 @@ const toastStyle = {
   progress: undefined,
   pauseOnFocusLoss: false,
 };
-/**
- * 
- * @param {string} message 
- */
-export const logError = (message) => {
+
+export const logError = (message:string): void => {
   toast.error(message, toastStyle);
 };
-/**
- * 
- * @param {string} message 
- */
-export const showSuccessMessage = (message) => {
+
+export const showSuccessMessage = (message: string): void => {
   toast.success(message, toastStyle);
-  
 };
-/**
- * 
- * @param {string} message 
- */
-export const infoMessage = (message) => {
+
+export const infoMessage = (message: string): void => {
   toast.info(message, toastStyle);
 };

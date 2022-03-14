@@ -17,6 +17,7 @@
     "sourceType": "module",
     "ecmaVersion": "latest"
   },
+  
   "plugins": ["react"],
   "rules": {
     "indent": ["warn", 2],
