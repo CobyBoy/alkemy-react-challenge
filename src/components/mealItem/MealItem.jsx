@@ -67,15 +67,6 @@ const MealItem = ({ mealItem, pathname }) => {
     navigate(`${DETAILS_ROUTE}`);
   };
 
-  const renderButtonStyle = () => {
-    return {
-      width: '96%',
-      position: 'absolute',
-      bottom: '0.5rem',
-      backgroundColor: vegan ? '#19d21f' : '#1976d2', //#19d21f
-    };
-  };
-
   const addToMenu = (mealToAdd) => {
     let veganMeals = currentMeals.filter((currentMeal) => currentMeal?.vegan).length;
     let notVeganMeals = currentMeals.filter((currentMeal) => !currentMeal?.vegan).length;
@@ -139,7 +130,7 @@ const MealItem = ({ mealItem, pathname }) => {
               propToRender.functionToDispacth(mealItem, e);
             }}
             variant="contained"
-            style={renderButtonStyle()}
+            style={styles.renderButtonStyle(vegan)}
             startIcon={propToRender.icon}
           >
             {propToRender.textToDisplay}
