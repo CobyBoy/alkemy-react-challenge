@@ -87,3 +87,12 @@ export interface ComplexMealApiResult {
 export interface tokenApiResult {
     token: string
 }
+
+export interface UserAuthState {
+  authenticated: boolean;
+  token: string;
+}
+
+export interface MealState {
+  data: Array<Meal>
+}

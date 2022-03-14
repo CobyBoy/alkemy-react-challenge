@@ -1,12 +1,12 @@
 import * as apiClient from '../api/api.client';
-import { ComplexMeal } from '../api/interfaces';
+import { ComplexMeal } from '../shared/interfaces';
 import { authenticateAction } from '../store/slices/user/userReducer';
 import * as logService from './logService';
 import * as cacheService from './cacheService';
 import 'react-toastify/dist/ReactToastify.css';
-import { LoginValues } from '../api/interfaces';
+import { LoginValues } from '../shared/interfaces';
 import { Dispatch } from 'redux';
- 
+
 export const startLogin = async (values: LoginValues, dispatch: Dispatch<any>) => {
   try {
     const { data } = await apiClient.getLoginToken(values);
@@ -23,12 +23,7 @@ export const startLogin = async (values: LoginValues, dispatch: Dispatch<any>) =
   }
 };
 
-export const getMeals = async ({
-  resultsRequested,
-  diet,
-  ingredients,
-  query,
-}: ComplexMeal) => {
+export const getMeals = async ({resultsRequested, diet, ingredients, query, }: ComplexMeal) => {
   try {
     const { data } = await apiClient.getComplexMeals({
       resultsRequested,
@@ -37,8 +32,7 @@ export const getMeals = async ({
       query,
     });
 
-    if (data === undefined)
-      throw new Error('Could not fetch data from resource');
+    if (data === undefined) throw new Error('Could not fetch data from resource');
     if (data.results.length === 0) logService.infoMessage('No results found');
     return data.results;
   } catch (error) {

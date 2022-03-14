@@ -6,7 +6,7 @@ import {
   LoginValues,
   ComplexMealApiResult,
   tokenApiResult,
-} from './interfaces';
+} from '../shared/interfaces';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
