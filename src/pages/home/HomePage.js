@@ -11,8 +11,7 @@ import Grid from '@mui/material/Grid';
 import { useLocation } from 'react-router-dom';
 import LoadingPage from '../loadingPage/LoadingPage';
 import styles from './styles';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import NoMealsOnMenu from '../../components/noMealsOnMenu/NoMealsOnMenu';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -44,22 +43,12 @@ const HomePage = () => {
     }
   }, []);
 
-  
-
   return (
     <>
       {loading && mealsData?.length === 0 ? (
         <LoadingPage />
       ) : (
-        !loading &&
-        mealsData?.length === 0 && (
-          <Container>
-            <Typography style={styles.Typo}>
-              Use the search bar to add meals to the menu. You can add 2 vegan
-              and 2 non vegan meals to your menu
-            </Typography>
-          </Container>
-        )
+        !loading && mealsData?.length === 0 && <NoMealsOnMenu />
       )}
       <Grid container style={styles.Grid}>
         <MealsList meals={mealsData} pathname={pathname} />
