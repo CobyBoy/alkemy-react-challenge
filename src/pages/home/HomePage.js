@@ -43,17 +43,12 @@ const HomePage = () => {
     }
   }, []);
 
-  
-
   return (
     <>
       {loading && mealsData?.length === 0 ? (
         <LoadingPage />
       ) : (
-        !loading &&
-        mealsData?.length === 0 && (
-          <NoMealsOnMenu/>
-        )
+        !loading && mealsData?.length === 0 && <NoMealsOnMenu />
       )}
       <Grid container style={styles.Grid}>
         <MealsList meals={mealsData} pathname={pathname} />

@@ -1,7 +1,7 @@
 const Typo = { textAlign: 'center', margin: '5rem' };
 
 const styles = {
-  Typo
+  Typo,
 };
 
 export default styles;
