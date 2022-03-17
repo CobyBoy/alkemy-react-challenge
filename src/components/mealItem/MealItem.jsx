@@ -16,6 +16,8 @@ import styles from './style';
 const MealItem = ({ mealItem, pathname }) => {
   const { title, image, pricePerServing, nutrition, vegan} = mealItem;
   const currentMeals = useSelector((state) => state.persistedReducer.meals.data);
+  const mealNutrientsFiltered = ['Calories', 'Fat', 'Carbohydrates', 'Cholesterol'];
+  let mealNutrientsToShow = [];
   const dispatch = useDispatch();
   let navigate = useNavigate(); 
   const ADD = 'Add to menu';
@@ -25,11 +27,26 @@ const MealItem = ({ mealItem, pathname }) => {
     functionToDispacth: () => { },
     icon: ''
   };
-  /**
- * 
- * @param {Object} meal 
- * @param {React.MouseEvent} e 
- */
+  
+  const nutrients = nutrition?.nutrients;
+  const ingredients = nutrition?.ingredients;
+  mealNutrientsFiltered?.map((nutrientName) => {
+    mealNutrientsToShow.push(
+      nutrients?.find((nutrient) => {
+        return nutrient?.name == nutrientName;
+      })
+    );
+  });
+  const mealNutrientsToShowItems = mealNutrientsToShow?.map(
+    ({ amount, name }, index) => (
+      <div key={index + name}>
+        <Typography>{name}</Typography>
+        <div>{amount}</div>
+      </div>
+    )
+  );
+
+  const ingredientsToShowItems = ingredients?.map(({ name, id }, index) => (<span key={id + index}>{name}/ </span>));
   const functionReassign = (meal, e) => {
     e.target.textContent == ADD ? addToMenu(meal) : deleteMealFromMenu(meal);
     
@@ -46,22 +63,8 @@ const MealItem = ({ mealItem, pathname }) => {
     propToRender.functionToDispacth = functionReassign;
     propToRender.icon = <DeleteIcon/>;
   }
-  const mealNutrientsFiltered = [
-    'Calories',
-    'Fat',
-    'Carbohydrates',
-    'Cholesterol',
-  ];
-  let mealNutrientsToShow = [];
-  const nutrients = nutrition?.nutrients;
-  const ingredients = nutrition?.ingredients;
-  mealNutrientsFiltered.map((nutrientName) => {
-    mealNutrientsToShow.push(
-      nutrients?.find((nutrient) => {
-        return nutrient?.name == nutrientName;
-      })
-    );
-  });
+  
+  
 
   const handleClick = () => {
     navigate(`${DETAILS_ROUTE}`);
@@ -110,19 +113,10 @@ const MealItem = ({ mealItem, pathname }) => {
           <Typography>{title}</Typography>
           <div>Price: ${pricePerServing}</div>
           <Stack direction="row" spacing={2}>
-            {mealNutrientsToShow?.map(({ amount, name }, index) => (
-              <div key={index + name}>
-                <Typography>{name}</Typography>
-                <div>{amount}</div>
-              </div>
-            ))}
+            {mealNutrientsToShowItems}
           </Stack>
           <Typography>Ingredients</Typography>
-          <div>
-            {ingredients?.map(({ name, id }, index) => (
-              <span key={id + index}>{name}/ </span>
-            ))}
-          </div>
+          <div>{ingredientsToShowItems}</div>
         </CardContent>
         <CardActions style={styles.CardActions}>
           <Button
