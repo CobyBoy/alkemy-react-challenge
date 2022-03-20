@@ -78,18 +78,18 @@ const MealItem = ({ mealItem, pathname }) => {
       logService.logError('Sorry, menu is full. Meal can\'t be added');
     }
     else
-    if (mealToAdd?.vegan && veganMeals >= 2) {
-      logService.logError('Sorry, meal can\'t be added. There are already two vegan meals on menu');
-    }else
-    if (!mealToAdd?.vegan && notVeganMeals >= 2) {
+    if (
+      (mealToAdd?.vegan && veganMeals >= 2) ||
+      (!mealToAdd?.vegan && notVeganMeals >= 2)
+    ) {
       logService.logError(
-        'Sorry, meal can\'t be added. There are already two non vegan meals on menu'
+        `Sorry, meal can't be added. There are already two ${
+          mealToAdd?.vegan ? 'vegan' : 'non-vegan'
+        } meals on menu`
       );
-    }
-    else if (currentMeals.some(current => current.id === mealToAdd?.id)) {
+    } else if (currentMeals.some((current) => current.id === mealToAdd?.id)) {
       logService.logError('Meal is already on the menu');
-    }
-    else {
+    } else {
       dispatch(getComplexMealsAction.addMeal(mealItem));
       logService.showSuccessMessage('Success. Meal added to menu');
     }
