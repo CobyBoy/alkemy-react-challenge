@@ -1,6 +1,10 @@
 ## To do
 Tests --> develop branch
 
+![imagen](https://user-images.githubusercontent.com/47018795/159528308-ac73b7f4-5cc8-4fd6-bbff-afd93d5da4ca.png)
+![imagen](https://user-images.githubusercontent.com/47018795/159528681-d0a6e35e-eae3-4ee0-8511-fee456518a90.png)
+![imagen](https://user-images.githubusercontent.com/47018795/159528818-7ff78634-710a-407a-9aee-174383a03860.png)
+
 ## Screenshots
 ## [Login page "/"](https://github.com/CobyBoy/alkemy-react-challenge/blob/master/src/pages/login/LoginPage.js)
 ![imagen](https://user-images.githubusercontent.com/47018795/158022478-6da5c899-8421-4208-af31-807f497d98d8.png)
