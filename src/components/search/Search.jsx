@@ -43,6 +43,7 @@ const Search = () => {
               />
             </Box>
             <Button
+              type='submit'
               sx={styles.button}
               variant={styles.button.variant()}
             >
