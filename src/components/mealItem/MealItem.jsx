@@ -14,20 +14,25 @@ import * as logService from '../../services/logService';
 import styles from './style';
 
 const MealItem = ({ mealItem, pathname }) => {
-  const { title, image, pricePerServing, nutrition, vegan} = mealItem;
+  const { title, image, pricePerServing, nutrition, vegan } = mealItem;
   const currentMeals = useSelector((state) => state.persistedReducer.meals.data);
-  const mealNutrientsFiltered = ['Calories', 'Fat', 'Carbohydrates', 'Cholesterol'];
+  const mealNutrientsFiltered = [
+    'Calories',
+    'Fat',
+    'Carbohydrates',
+    'Cholesterol',
+  ];
   let mealNutrientsToShow = [];
   const dispatch = useDispatch();
-  let navigate = useNavigate(); 
+  let navigate = useNavigate();
   const ADD = 'Add to menu';
   const DELETE = 'Delete';
   let propToRender = {
     textToDisplay: '',
-    functionToDispacth: () => { },
-    icon: ''
+    functionToDispacth: () => {},
+    icon: '',
   };
-  
+
   const nutrients = nutrition?.nutrients;
   const ingredients = nutrition?.ingredients;
   mealNutrientsFiltered?.map((nutrientName) => {
@@ -49,50 +54,48 @@ const MealItem = ({ mealItem, pathname }) => {
   const ingredientsToShowItems = ingredients?.map(({ name, id }, index) => (<span key={id + index}>{name}/ </span>));
   const functionReassign = (meal, e) => {
     e.target.textContent == ADD ? addToMenu(meal) : deleteMealFromMenu(meal);
-    
   };
-
 
   if (pathname === SEARCH_RESULTS_ROUTE) {
     propToRender.textToDisplay = ADD;
     propToRender.functionToDispacth = functionReassign;
     propToRender.icon;
-  }
-  else {
+  } else {
     propToRender.textToDisplay = DELETE;
     propToRender.functionToDispacth = functionReassign;
-    propToRender.icon = <DeleteIcon/>;
+    propToRender.icon = <DeleteIcon />;
   }
-  
-  
 
   const handleClick = () => {
     navigate(`${DETAILS_ROUTE}`);
+  };
+
+  const checkIfMealCanBeAddedToMenu = (
+    currentMeals,
+    mealToAdd,
+    veganMeals,
+    notVeganMeals
+  ) => {
+    if (currentMeals.length === 4) return logService.logError('Sorry, menu is full. Meal can\'t be added');
+    if (
+      (mealToAdd?.vegan && veganMeals >= 2) ||
+      (!mealToAdd?.vegan && notVeganMeals >= 2)
+    )
+      return logService.logError(
+        `Sorry, meal can't be added. There are already two ${ mealToAdd?.vegan ? 'vegan' : 'non-vegan'} meals on menu`
+      );
+
+    if (currentMeals.some((current) => current.id === mealToAdd?.id)) return logService.logError('Meal is already on the menu');
   };
 
   const addToMenu = (mealToAdd) => {
     let veganMeals = currentMeals.filter((currentMeal) => currentMeal?.vegan).length;
     let notVeganMeals = currentMeals.filter((currentMeal) => !currentMeal?.vegan).length;
 
-    if (currentMeals.length === 4) {
-      logService.logError('Sorry, menu is full. Meal can\'t be added');
-    }
-    else
-    if (
-      (mealToAdd?.vegan && veganMeals >= 2) ||
-      (!mealToAdd?.vegan && notVeganMeals >= 2)
-    ) {
-      logService.logError(
-        `Sorry, meal can't be added. There are already two ${
-          mealToAdd?.vegan ? 'vegan' : 'non-vegan'
-        } meals on menu`
-      );
-    } else if (currentMeals.some((current) => current.id === mealToAdd?.id)) {
-      logService.logError('Meal is already on the menu');
-    } else {
-      dispatch(getComplexMealsAction.addMeal(mealItem));
-      logService.showSuccessMessage('Success. Meal added to menu');
-    }
+    checkIfMealCanBeAddedToMenu(currentMeals, mealToAdd, veganMeals, notVeganMeals);
+
+    dispatch(getComplexMealsAction.addMeal(mealItem));
+    logService.showSuccessMessage('Success. Meal added to menu');
   };
 
   const deleteMealFromMenu = (mealToDelete) => {
