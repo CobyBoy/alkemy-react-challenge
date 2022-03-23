@@ -25,7 +25,7 @@ const Search = () => {
         }}
       >
         {() => (
-          <Form style={styles.Form}>
+          <Form role="search"  style={styles.Form}>
             <Box style={styles.box}>
               <label htmlFor="search" style={styles.Label}></label>
               <Field
@@ -40,12 +40,14 @@ const Search = () => {
                 name="textSearch"
                 component="div"
                 style={styles.ErrorMessage}
+                role="alert"
               />
             </Box>
             <Button
-              type='submit'
+              type="submit"
               sx={styles.button}
               variant={styles.button.variant()}
+              tabIndex={0}
             >
               Search
             </Button>

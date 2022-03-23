@@ -27,29 +27,43 @@ const AverageCard = ({ meals }) => {
   
 
   return (
-    <Card sx={styles.Card}>
+    <Card
+      sx={styles.Card}
+      tabIndex={0}
+      role="region"
+      aria-label="Price, average preparation time and health score."
+    >
       <CardContent>
         <Paper>
-          <Typography style={(styles.CardSection, styles.CardContentTitle)}>
+          <Typography
+            style={(styles.CardSection, styles.CardContentTitle)}
+            component="h5"
+          >
             Total Price:
           </Typography>
-          <div style={styles.CardSection}>${price}</div>
+          <p style={styles.CardSection}>${price}.</p>
         </Paper>
       </CardContent>
       <CardContent>
         <Paper>
-          <Typography style={(styles.CardSection, styles.CardContentTitle)}>
+          <Typography
+            style={(styles.CardSection, styles.CardContentTitle)}
+            component="h5"
+          >
             Average Preparation Time:
           </Typography>
-          <div style={styles.CardSection}>{preparationTime} minutes</div>
+          <p style={styles.CardSection}>{preparationTime} minutes.</p>
         </Paper>
       </CardContent>
       <CardContent>
         <Paper>
-          <Typography style={(styles.CardSection, styles.CardContentTitle)}>
+          <Typography
+            style={(styles.CardSection, styles.CardContentTitle)}
+            component="h5"
+          >
             Average Health Score:
           </Typography>
-          <div style={styles.CardSection}>{healthScore}</div>
+          <p style={styles.CardSection}>{healthScore}.</p>
         </Paper>
       </CardContent>
     </Card>

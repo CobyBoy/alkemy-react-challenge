@@ -30,9 +30,9 @@ const LoginForm = () => {
       validationSchema={Yup.object(fieldsToValidate)}
     >
       {({ isSubmitting }) => (
-        <Form id="loginForm" role={'form'} data-testid="form">
+        <Form id="loginForm" role={'form'} tabIndex={0} data-testid="form">
           <Box sx={styles.Box}>
-            <label htmlFor="email" style={styles.Label}>
+            <label htmlFor="email" id="emailLabel" style={styles.Label}>
               Email address
             </label>
 
@@ -45,16 +45,19 @@ const LoginForm = () => {
                 size="lg"
                 style={styles.InputField}
                 required
+                aria-label="Insert email"
+                aria-labelledby="emailLabel"
               />
               <ErrorMessage
                 name="email"
                 component="div"
                 style={styles.ErrorMessage}
+                role="alert"
               />
             </Box>
           </Box>
           <Box sx={styles.Box}>
-            <label htmlFor="password" style={styles.Label}>
+            <label htmlFor="password" id="passwordLabel" style={styles.Label}>
               Password
             </label>
             <Box>
@@ -65,11 +68,15 @@ const LoginForm = () => {
                 placeholder="react"
                 size="lg"
                 style={styles.InputField}
+                required
+                aria-label="Insert password"
+                aria-labelledby="passwordLabel"
               />
               <ErrorMessage
                 name="password"
                 component="div"
                 style={styles.ErrorMessage}
+                role="alert"
               />
             </Box>
           </Box>

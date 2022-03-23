@@ -86,16 +86,14 @@ const MealItem = ({ mealItem, pathname }) => {
       );
 
     if (currentMeals.some((current) => current.id === mealToAdd?.id)) return logService.logError('Meal is already on the menu');
+    dispatch(getComplexMealsAction.addMeal(mealItem));
+    logService.showSuccessMessage('Success. Meal added to menu');
   };
 
   const addToMenu = (mealToAdd) => {
     let veganMeals = currentMeals.filter((currentMeal) => currentMeal?.vegan).length;
     let notVeganMeals = currentMeals.filter((currentMeal) => !currentMeal?.vegan).length;
-
     checkIfMealCanBeAddedToMenu(currentMeals, mealToAdd, veganMeals, notVeganMeals);
-
-    dispatch(getComplexMealsAction.addMeal(mealItem));
-    logService.showSuccessMessage('Success. Meal added to menu');
   };
 
   const deleteMealFromMenu = (mealToDelete) => {
@@ -105,13 +103,21 @@ const MealItem = ({ mealItem, pathname }) => {
 
   return (
     <>
-      <Card sx={styles.Card}>
-        <CardMedia component="img" image={image} alt={title} />
+      <Card sx={styles.Card} role="listitem" aria-label={title}>
+        <CardMedia
+          component="img"
+          image={image}
+          alt={title}
+          decoding="async"
+          aria-describedby={title}
+        />
         <CardContent
           sx={styles.CardContent}
           onClick={() => {
             handleClick();
           }}
+          tabIndex={0}
+          role="figcaption"
         >
           <Typography>{title}</Typography>
           <div>Price: ${pricePerServing}</div>
@@ -129,6 +135,7 @@ const MealItem = ({ mealItem, pathname }) => {
             variant="contained"
             style={styles.renderButtonStyle(vegan)}
             startIcon={propToRender.icon}
+            aria-label={propToRender.textToDisplay +' ' +title}
           >
             {propToRender.textToDisplay}
           </Button>

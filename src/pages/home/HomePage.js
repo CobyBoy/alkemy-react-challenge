@@ -51,11 +51,19 @@ const HomePage = () => {
         !loading && mealsData?.length === 0 && <NoMealsOnMenu />
       )}
       <Grid container style={styles.Grid}>
-        <MealsList meals={mealsData} pathname={pathname} />
+        <section
+          style={styles.Grid}
+          tabIndex={0}
+          aria-label={mealsData.length + ' meals available in menu'}
+          aria-live="polite"
+        >
+          <MealsList meals={mealsData} pathname={pathname} />
+        </section>
+
         <AverageCard meals={mealsData} />
       </Grid>
 
-      <ToastContainer />
+      <ToastContainer aria-live="polite" />
     </>
   );
 };

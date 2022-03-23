@@ -23,8 +23,8 @@ const PrivateLayout = ({ children }) => {
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar sx={styles.appBar}>
-        <NavLink style={styles.navLink} to={HOME_ROUTE}>
+      <AppBar sx={styles.appBar} tabIndex={0}>
+        <NavLink style={styles.navLink} to={HOME_ROUTE} aria-label="Menu">
           Menu
         </NavLink>
 

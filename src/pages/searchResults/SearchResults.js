@@ -29,11 +29,18 @@ const SearchResults = () => {
       {loading || mealSearched.length === 0 ? (
         <LoadingPage />
       ) : (
-        <Grid container style={styles.grid}>
+        <Grid
+          container
+          component={'section'}
+          style={styles.grid}
+          aria-label={mealSearched.length + ' results found.'}
+          tabIndex={0}
+          aria-live="polite"
+        >
           <MealsList meals={mealSearched} pathname={pathname}></MealsList>
         </Grid>
       )}
-      <ToastContainer />
+      <ToastContainer aria-live="polite" />
     </>
   );
 };
