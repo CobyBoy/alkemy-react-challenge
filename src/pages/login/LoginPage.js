@@ -13,7 +13,13 @@ const LoginPage = () => {
       <Container>
         <Paper elevation={styles.paper.apply()}>
           <Box style={styles.box}>
-            <Typography style={styles.typo} variant={styles.typo.variant()} role="heading">
+            <Typography
+              style={styles.typo}
+              variant={styles.typo.variant()}
+              id="loging-heading"
+              role="heading"
+              aria-level="1"
+            >
               Login page. Welcome to blah blah blah
             </Typography>
           </Box>

@@ -30,7 +30,7 @@ const LoginForm = () => {
       validationSchema={Yup.object(fieldsToValidate)}
     >
       {({ isSubmitting }) => (
-        <Form id="loginForm" role={'form'} tabIndex={0} data-testid="form">
+        <Form id="loginForm" role={'form'} tabIndex={0}>
           <Box sx={styles.Box}>
             <label htmlFor="email" id="emailLabel" style={styles.Label}>
               Email address
@@ -47,9 +47,12 @@ const LoginForm = () => {
                 required
                 aria-label="Insert email"
                 aria-labelledby="emailLabel"
+                aria-errormessage="emailError"
+                aria-invalid="true"
               />
               <ErrorMessage
                 name="email"
+                id="emailError"
                 component="div"
                 style={styles.ErrorMessage}
                 role="alert"
@@ -71,9 +74,12 @@ const LoginForm = () => {
                 required
                 aria-label="Insert password"
                 aria-labelledby="passwordLabel"
+                aria-errormessage="passwordError"
+                aria-invalid="true"
               />
               <ErrorMessage
                 name="password"
+                id="passwordError"
                 component="div"
                 style={styles.ErrorMessage}
                 role="alert"
